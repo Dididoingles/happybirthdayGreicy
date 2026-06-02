@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário, Greicy! </title>
+    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes do Google: Playfair Display para elegância, Great Vibes para romance e Montserrat para leitura fluida -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blush: {
+                            50: '#fff5f6',
+                            100: '#ffebe3',
+                            200: '#ffd3db',
+                            300: '#fca5b7',
+                            400: '#f66d8e',
+                            500: '#e54069',
+                            rose: '#b76e79',
+                        },
+                        gold: {
+                            light: '#f3e5ab',
+                            soft: '#dfba73',
+                            premium: '#d4af37'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        cursive: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: radial-gradient(circle at center, #ffffff 0%, #fff0f2 60%, #ffe3e7 100%);
+            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .petal {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, #fff0f3, #fca5b7);
+            border-radius: 150% 0 150% 150% / 150% 0 150% 150%;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .sparkle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(253,224,71,0.9) 0%, rgba(212,175,55,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fff5f6; }
+        ::-webkit-scrollbar-thumb { background: #e54069; border-radius: 10px; }
+        .rose-gold-glow { box-shadow: 0 10px 30px -5px rgba(183, 110, 121, 0.4); }
+        .rose-gold-glow-hover:hover { box-shadow: 0 15px 35px -3px rgba(183, 110, 121, 0.6); }
+        @keyframes rotate-vinyl {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .rotate-vinyl { animation: rotate-vinyl 5s linear infinite; }
+        @media (max-width: 640px) {
+            .polaroid-caption { margin-top: 0.5rem; text-align: center; }
+        }
+        /* Gaveta do YouTube - corrigida */
+        .youtube-drawer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,235,227,0.98) 100%);
+            border-radius: 1.5rem;
+            margin-top: 0;
+            backdrop-filter: blur(4px);
+        }
+        .youtube-drawer.open {
+            max-height: 500px;
+        }
+        .youtube-embed-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        .youtube-embed-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+            border: none;
+        }
+        /* Estilos para pós créditos */
+        .post-credits-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .post-credits-video {
+            flex: 1;
+            min-width: 280px;
+        }
+        .post-credits-playlist {
+            flex: 1;
+            min-width: 280px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(229, 64, 105, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .playlist-scroll {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 0.75rem;
+        }
+        .playlist-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .playlist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid rgba(229, 64, 105, 0.15);
+            transition: all 0.2s ease;
+        }
+        .playlist-item:hover {
+            background: rgba(229, 64, 105, 0.08);
+            transform: translateX(4px);
+        }
+        .playlist-number {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #e54069;
+            width: 24px;
+            text-align: center;
+        }
+        .playlist-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #334155;
+            flex: 1;
+        }
+        .playlist-artist {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+        .video-shorts-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+        }
+        .video-shorts-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        @media (max-width: 768px) {
+            .post-credits-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-slate-800 antialiased selection:bg-blush-200">
+
+    <div id="particle-container" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+    <!-- TELA DE LOADING -->
+    <div id="loader-screen" class="fixed inset-0 bg-gradient-to-tr from-[#ffebe3] via-[#fff5f6] to-[#ffd3db] z-50 flex flex-col items-center justify-center p-6 transition-all duration-1000">
+        <div class="text-center max-w-md w-full flex flex-col items-center space-y-8">
+            <div class="relative w-24 h-24 flex items-center justify-center">
+                <div class="absolute w-16 h-16 bg-blush-rose opacity-20 rounded-full animate-ping"></div>
+                <div class="absolute w-20 h-20 bg-blush-300 opacity-40 rounded-full animate-pulse"></div>
+                <div class="w-12 h-12 bg-blush-400 rounded-full flex items-center justify-center shadow-lg text-white">
+                    <i data-lucide="heart" class="w-6 h-6 fill-current"></i>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <p class="text-xs uppercase tracking-[0.3em] text-blush-rose font-semibold">Special Edition • June 3rd</p>
+                <h1 class="text-5xl md:text-6xl font-cursive text-blush-500 font-bold drop-shadow-sm">Happy Birthday, Greicy!</h1>
+                <p class="text-sm text-slate-500 italic mt-2 font-serif"> ...</p>
+                <p class="text-sm text-slate-500 italic mt-2 font-serif"> Esta carta é para você.</p>
+            </div>
+            <button id="btn-open" class="group relative px-10 py-4 bg-white border border-blush-200 text-blush-rose rounded-full font-semibold tracking-widest text-sm uppercase transition-all duration-500 rose-gold-glow rose-gold-glow-hover transform hover:-translate-y-1 active:translate-y-0 overflow-hidden">
+                <span class="absolute inset-0 bg-gradient-to-r from-blush-100 to-blush-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                <span class="relative z-10 flex items-center space-x-2">
+                    <span>Abrir</span>
+                    <i data-lucide="gift" class="w-4 h-4 transition-transform duration-300 group-hover:rotate-12"></i>
+                </span>
+            </button>
+            <div class="text-xs text-slate-400 font-light mt-4">Quando você clicar em abrir, vai tocar uma música que me lembra você.</div>
+        </div>
+    </div>
+
+    <!-- PLAYER DE MÚSICA PRINCIPAL (Iris) -->
+    <div id="music-player" class="fixed bottom-6 right-6 z-40 hidden md:flex items-center space-x-3 bg-white/80 backdrop-blur-md px-4 py-3 rounded-full border border-blush-100 shadow-lg transition-all duration-300 transform hover:scale-105">
+        <button id="btn-mute" class="relative w-10 h-10 rounded-full bg-blush-rose text-white flex items-center justify-center overflow-hidden focus:outline-none shadow-md">
+            <span id="vinyl-disc" class="absolute inset-0 flex items-center justify-center">
+                <i data-lucide="disc" class="w-6 h-6"></i>
+            </span>
+        </button>
+        <div class="text-left">
+            <p class="text-xs font-bold text-blush-rose">Playing Iris from Goo Goo Dolls</p>
+            <p class="text-[10px] text-slate-500 max-w-[120px] truncate" id="track-name">Greicy's Special Song</p>
+        </div>
+    </div>
+
+    <div id="mobile-music-btn" class="fixed top-4 right-4 z-40 md:hidden">
+        <button id="btn-mute-mobile" class="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-blush-rose border border-blush-100 flex items-center justify-center shadow-md">
+            <i data-lucide="music" class="w-5 h-5"></i>
+        </button>
+    </div>
+
+    <main id="main-content" class="hidden opacity-0 transition-opacity duration-1000 max-w-6xl mx-auto px-4 py-8 md:py-16 space-y-16 md:space-y-32">
+
+        <section class="text-center space-y-6 relative py-12">
+            <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+                <svg viewBox="0 0 200 200" class="w-96 h-96 text-blush-500">
+                    <path fill="currentColor" d="M100,20 C144,20 180,56 180,100 C180,144 144,180 100,180 C56,180 20,144 20,100 C20,56 56,20 100,20 Z" />
+                </svg>
+            </div>
+            <p class="text-blush-rose font-semibold tracking-[0.4em] text-xs md:text-sm uppercase animate-pulse">Parabéns pelo seu dia!</p>
+            <h2 class="text-6xl md:text-8xl font-cursive text-blush-500 font-bold leading-none">Greicy, Feliz Aniversário!</h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-transparent via-blush-rose to-transparent mx-auto my-4"></div>
+            <p class="text-lg md:text-xl text-slate-600 font-serif max-w-2xl mx-auto leading-relaxed px-4">Oi, Gre! Chegou o dia mais importante do ano, e eu queria recordar algumas coisas com você.</p>
+        </section>
+
+        <!-- SEÇÃO: MURAL DE POLAROIDS -->
+        <section class="space-y-8">
+            <div class="text-center space-y-2">
+                <h3 class="text-2xl font-serif text-slate-800 font-semibold flex items-center justify-center space-x-2">
+                    <i data-lucide="camera" class="w-6 h-6 text-blush-rose"></i>
+                    <span>Nossa Linha do Tempo</span>
+                </h3>
+                <p class="text-sm text-slate-500 italic max-w-md mx-auto">O ano era 2009.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 justify-items-center">
+                <div class="bg-white p-4 pb-6 rounded-sm shadow-xl transform rotate-[-2deg] hover:rotate-0 hover:scale-105 hover:shadow-2xl transition-all duration-300 max-w-[280px] w-full border border-slate-100 relative group">
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 -translate-y-4 w-16 h-8 bg-pink-100/60 rotate-[-12deg] z-20 pointer-events-none backdrop-blur-sm border-l border-r border-white/40 shadow-sm"></div>
+                    <div class="aspect-square bg-slate-100 overflow-hidden rounded-sm relative">
+                        <img src="https://res.cloudinary.com/dbwqwgbtx/image/upload/v1780422320/Zacha_fachada_piozyr.jpg" alt="Memory 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="mt-4 text-center space-y-1">
+                        <p class="font-cursive text-2xl text-blush-rose">Dr Luiz Zacharias de Lima</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold">Onde nossa jornada começou</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 hidden sm:block">📸 Foi aqui que eu conheci a menininha mais meiga do mundo.</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 block sm:hidden">📸 Foi aqui que eu conheci a menininha mais meiga do mundo.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 pb-6 rounded-sm shadow-xl transform rotate-[3deg] hover:rotate-0 hover:scale-105 hover:shadow-2xl transition-all duration-300 max-w-[280px] w-full border border-slate-100 relative group">
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 -translate-y-4 w-16 h-8 bg-pink-100/60 rotate-[8deg] z-20 pointer-events-none backdrop-blur-sm border-l border-r border-white/40 shadow-sm"></div>
+                    <div class="aspect-square bg-slate-100 overflow-hidden rounded-sm relative">
+                        <img src="https://res.cloudinary.com/dbwqwgbtx/image/upload/v1780422320/Zacha_sala_de_aula_vlgnhq.jpg" alt="Memory 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="mt-4 text-center space-y-1">
+                        <p class="font-cursive text-2xl text-blush-rose">Infância</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold">Tantas risadas acumuladas</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 hidden sm:block">Dias inesquecíveis ao seu lado</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 block sm:hidden">Dias inesquecíveis ao seu lado</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 pb-6 rounded-sm shadow-xl transform rotate-[-1deg] hover:rotate-0 hover:scale-105 hover:shadow-2xl transition-all duration-300 max-w-[280px] w-full border border-slate-100 relative group">
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 -translate-y-4 w-16 h-8 bg-pink-100/60 rotate-[-5deg] z-20 pointer-events-none backdrop-blur-sm border-l border-r border-white/40 shadow-sm"></div>
+                    <div class="aspect-square bg-slate-100 overflow-hidden rounded-sm relative">
+                        <img src="https://res.cloudinary.com/dbwqwgbtx/image/upload/v1780419865/WhatsApp_Image_2026-06-02_at_13.44.28_rcn6rm.jpg" alt="Memory 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="mt-4 text-center space-y-1">
+                        <p class="font-cursive text-2xl text-blush-rose">Aventuras</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold">Mais um ano ao seu lado</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 hidden sm:block">A gente nem sabia o quanto isso ia importar.</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 block sm:hidden">A gente nem sabia o quanto isso ia importar.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 pb-6 rounded-sm shadow-xl transform rotate-[2deg] hover:rotate-0 hover:scale-105 hover:shadow-2xl transition-all duration-300 max-w-[280px] w-full border border-slate-100 relative group">
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 -translate-y-4 w-16 h-8 bg-pink-100/60 rotate-[3deg] z-20 pointer-events-none backdrop-blur-sm border-l border-r border-white/40 shadow-sm"></div>
+                    <div class="aspect-square bg-slate-100 overflow-hidden rounded-sm relative">
+                        <img src="https://res.cloudinary.com/dbwqwgbtx/image/upload/v1780422320/etec-alcides-cestari_prz3y3.jpg" alt="Memory 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="mt-4 text-center space-y-1">
+                        <p class="font-cursive text-2xl text-blush-rose">Sorriso genuíno</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold">Sua alegria contagiante</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 hidden sm:block">Você iluminava nossos dias</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 block sm:hidden">Você iluminava nossos dias</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 pb-6 rounded-sm shadow-xl transform rotate-[-3deg] hover:rotate-0 hover:scale-105 hover:shadow-2xl transition-all duration-300 max-w-[280px] w-full border border-slate-100 relative group">
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 -translate-y-4 w-16 h-8 bg-pink-100/60 rotate-[-8deg] z-20 pointer-events-none backdrop-blur-sm border-l border-r border-white/40 shadow-sm"></div>
+                    <div class="aspect-square bg-slate-100 overflow-hidden rounded-sm relative">
+                        <img src="https://res.cloudinary.com/dbwqwgbtx/image/upload/v1780419865/WhatsApp_Image_2026-06-02_at_13.43.01_syr9ji.jpg" alt="Memory 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="mt-4 text-center space-y-1">
+                        <p class="font-cursive text-2xl text-blush-rose">Cúmplices</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold">A gente aprontava todas</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 hidden sm:block">Ninguém explica, nós entendemos</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 block sm:hidden">Ninguém explica, nós entendemos</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 pb-6 rounded-sm shadow-xl transform rotate-[1deg] hover:rotate-0 hover:scale-105 hover:shadow-2xl transition-all duration-300 max-w-[280px] w-full border border-slate-100 relative group">
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 -translate-y-4 w-16 h-8 bg-pink-100/60 rotate-[6deg] z-20 pointer-events-none backdrop-blur-sm border-l border-r border-white/40 shadow-sm"></div>
+                    <div class="aspect-square bg-slate-100 overflow-hidden rounded-sm relative">
+                        <img src="https://res.cloudinary.com/dbwqwgbtx/image/upload/v1780419865/WhatsApp_Image_2026-06-02_at_13.46.59_jqjmkm.jpg" alt="Memory 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="mt-4 text-center space-y-1">
+                        <p class="font-cursive text-2xl text-blush-rose">Para a eternidade</p>
+                        <p class="text-[11px] text-slate-400 uppercase tracking-widest font-semibold">Superando desafios juntas</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 hidden sm:block">E no fim foi para sempre porque...</p>
+                        <p class="polaroid-caption text-xs text-slate-500 mt-2 block sm:hidden">E no fim foi para sempre porque...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: O QUE A GENTE OUVIAL... COM GAVETA DO YOUTUBE (SEM AUTOPLAY) - CORRIGIDA -->
+        <section class="max-w-4xl mx-auto">
+            <div class="bg-white/40 backdrop-blur-sm rounded-2xl p-8 md:p-10 text-center border border-blush-100 shadow-md transition-all duration-300 hover:shadow-lg">
+                <div class="space-y-5">
+                    <div class="flex items-center justify-center space-x-2">
+                        <i data-lucide="headphones" class="w-7 h-7 text-blush-rose"></i>
+                        <h3 class="text-1xl md:text-3xl font-serif text-slate-800 font-semibold">O que a gente ouvia...</h3>
+                        <i data-lucide="music" class="w-6 h-6 text-blush-400"></i>
+                    </div>
+                    <p class="text-lg text-slate-600 font-serif italic max-w-lg mx-auto leading-relaxed">A música é uma forma de reviver o passado.</p>
+                    <div class="pt-4">
+                        <button id="btn-toggle-youtube" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blush-500 to-blush-400 hover:from-blush-600 hover:to-blush-500 text-white rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 rose-gold-glow-hover">
+                            <i data-lucide="youtube" class="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse"></i>
+                            <span class="text-sm md:text-base uppercase tracking-wide" id="youtube-btn-text">Abrir playlist</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" id="chevron-icon"></i>
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-slate-400 pt-2">E essas são as músicas que me lembram você.</p>
+                </div>
+            </div>
+
+            <!-- GAVETA DO YOUTUBE - CORRIGIDA: sem sobreposição e fecha corretamente -->
+            <div id="youtube-drawer" class="youtube-drawer mt-4 border border-blush-100 shadow-xl rounded-2xl overflow-hidden">
+                <div class="p-4 md:p-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-serif text-blush-rose font-semibold text-lg">Nossa playlist especial</h4>
+                        <button id="close-drawer" class="text-slate-400 hover:text-blush-rose transition-colors">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="youtube-embed-wrapper">
+                        <iframe id="youtube-player-iframe" 
+                                src="https://www.youtube.com/embed/_HZM0QiuUS8?autoplay=0&rel=0&modestbranding=1&playsinline=1" 
+                                title="Playlist especial Greicy" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay=0; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-3 text-center">Clique no play para ouvir nossa playlist - as músicas que marcaram nossa história</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: TEXTO DAS QUALIDADES -->
+        <section class="max-w-4xl mx-auto bg-white/30 backdrop-blur-sm rounded-2xl p-6 md:p-10 text-center border border-blush-100 shadow-md">
+            <div class="space-y-4">
+                <span class="inline-flex items-center space-x-1 px-3 py-1 bg-blush-100 text-blush-rose rounded-full text-xs font-semibold uppercase tracking-widest">
+                    <i data-lucide="heart" class="w-3 h-3 animate-pulse"></i>
+                    <span>...É você. Sempre foi você.</span>
+                </span>
+                <div class="font-serif text-slate-700 leading-relaxed space-y-4">
+                    <p class="text-base md:text-lg">
+                        Pequena Greicy, a gente passa muito <strong class="text-blush-rose">tempo</strong> procurando pelo amor sem saber que... O <strong class="text-blush-rose">amor</strong> é <strong class="text-blush-rose">aquela menininha meiga</strong> que esteve por aqui o tempo todo. E eu queria que você soubesse que <strong class="text-blush-rose">foi você que me ensinou o que o amor é.</strong>.  
+                        Você me inspira todos os dias e <strong class="text-blush-rose">quando eu crescer quero ser igual a você.</strong> Obrigada por existir.
+                    </p>
+                    <p class="text-sm italic text-slate-500">• Ps: sim, eu escrevi esse código à mão porque eu te amo. <3 •</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: PÓS CRÉDITOS - Video Shorts + Playlist personalizada -->
+        <section class="max-w-6xl mx-auto space-y-6">
+            <div class="text-center space-y-2">
+                <h3 class="text-2xl font-serif text-slate-800 font-semibold flex items-center justify-center space-x-2">
+                    <i data-lucide="clapperboard" class="w-6 h-6 text-blush-rose"></i>
+                    <span>Pós Créditos</span>
+                </h3>
+                <p class="text-sm text-slate-500 italic">Um making off especial e nossa playlist da vida</p>
+            </div>
+            
+            <div class="post-credits-container">
+                <!-- Lado esquerdo: Video Shorts (sem som e sem interromper a música) -->
+                <div class="post-credits-video">
+                    <div class="bg-white/40 backdrop-blur-sm rounded-2xl p-4 border border-blush-100 shadow-md h-full flex flex-col">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i data-lucide="video" class="w-5 h-5 text-blush-rose"></i>
+                            <h4 class="font-serif text-blush-rose font-semibold text-lg">Making off</h4>
+                        </div>
+                        <div class="video-shorts-wrapper">
+                            <iframe src="https://www.youtube.com/embed/WA5LzTRyk48?autoplay=0&mute=1&loop=0&controls=1&modestbranding=1&playsinline=1&rel=0" 
+                                    title="Making off Greicy"
+                                    allow="accelerometer; autoplay=0; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3 text-center">📽️ Clique para assistir ao making off (vídeo sem som)</p>
+                    </div>
+                </div>
+
+                <!-- Lado direito: Playlist personalizada -->
+                <div class="post-credits-playlist">
+                    <div class="flex items-center gap-2 p-4 pb-0">
+                        <i data-lucide="list-music" class="w-5 h-5 text-blush-rose"></i>
+                        <h4 class="font-serif text-blush-rose font-semibold text-lg">Playlist da Greicy</h4>
+                        <span class="text-xs text-slate-400 ml-auto">17 músicas</span>
+                    </div>
+                    <div class="playlist-scroll">
+                        <div class="playlist-item"><span class="playlist-number">1.</span><span class="playlist-name">Iris</span><span class="playlist-artist">Goo Goo Dolls</span></div>
+                        <div class="playlist-item"><span class="playlist-number">2.</span><span class="playlist-name">Call Me When You Break Up</span><span class="playlist-artist">Selena Gomez</span></div>
+                        <div class="playlist-item"><span class="playlist-number">3.</span><span class="playlist-name">Glad You Came</span><span class="playlist-artist">The Wanted</span></div>
+                        <div class="playlist-item"><span class="playlist-number">4.</span><span class="playlist-name">Menina Estranha</span><span class="playlist-artist">Restart</span></div>
+                        <div class="playlist-item"><span class="playlist-number">5.</span><span class="playlist-name">The Only Exception</span><span class="playlist-artist">Paramore</span></div>
+                        <div class="playlist-item"><span class="playlist-number">6.</span><span class="playlist-name">Skater Boy</span><span class="playlist-artist">Avril Lavigne</span></div>
+                        <div class="playlist-item"><span class="playlist-number">7.</span><span class="playlist-name">Adore You</span><span class="playlist-artist">Harry Styles</span></div>
+                        <div class="playlist-item"><span class="playlist-number">8.</span><span class="playlist-name">Matilda</span><span class="playlist-artist">Harry Styles</span></div>
+                        <div class="playlist-item"><span class="playlist-number">9.</span><span class="playlist-name">Razões e Emoções</span><span class="playlist-artist">NX Zero</span></div>
+                        <div class="playlist-item"><span class="playlist-number">10.</span><span class="playlist-name">Um Minuto para o Fim do Mundo</span><span class="playlist-artist">CPM22</span></div>
+                        <div class="playlist-item"><span class="playlist-number">11.</span><span class="playlist-name">Só os Loucos Sabem</span><span class="playlist-artist">Charlie Brown Jr.</span></div>
+                        <div class="playlist-item"><span class="playlist-number">12.</span><span class="playlist-name">Dias de Luta, Dias de Glória</span><span class="playlist-artist">Charlie Brown Jr.</span></div>
+                        <div class="playlist-item"><span class="playlist-number">13.</span><span class="playlist-name">Vagalumes</span><span class="playlist-artist">Pollo</span></div>
+                        <div class="playlist-item"><span class="playlist-number">14.</span><span class="playlist-name">Dear God</span><span class="playlist-artist">Avenged Sevenfold</span></div>
+                        <div class="playlist-item"><span class="playlist-number">15.</span><span class="playlist-name">Complicated</span><span class="playlist-artist">Avril Lavigne</span></div>
+                        <div class="playlist-item"><span class="playlist-number">16.</span><span class="playlist-name">A Thousand Miles</span><span class="playlist-artist">Vanessa Carlton</span></div>
+                        <div class="playlist-item"><span class="playlist-number">17.</span><span class="playlist-name">Bring Me to Life</span><span class="playlist-artist">Evanescence</span></div>
+                    </div>
+                    <div class="p-3 text-center border-t border-blush-100 bg-white/30">
+                        <p class="text-[10px] text-slate-400">🎧 Cada música guarda um pedacinho da nossa história</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: MENSAGEM FINAL -->
+        <section class="max-w-3xl mx-auto bg-white/40 backdrop-blur-md rounded-3xl p-8 md:p-12 text-center border border-blush-100 rose-gold-glow space-y-6">
+            <div class="w-16 h-16 bg-blush-100 rounded-full flex items-center justify-center text-blush-rose mx-auto">
+                <i data-lucide="gift" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-3xl font-serif text-slate-800 font-bold">Feliz Vida, Greicy!</h3>
+            <p class="text-slate-600 leading-relaxed font-serif text-lg">Se eu pudesse te daria o mundo todinho. Enquanto eu existir você nunca vai estar sozinha.</p>
+            <p class="text-slate-600 leading-relaxed font-serif text-lg">Te amo infinitamente,</p>
+            <div class="font-cursive text-4xl text-blush-rose pt-4">Sua irmã, Didi.</div>
+        </section>
+    </main>
+
+    <footer class="w-full py-8 text-center text-xs text-slate-400 font-light mt-16">
+        <p>© 2026 • Criado especialmente para Greicy no seu aniversário de 3 de Junho.</p>
+    </footer>
+
+    <audio id="bg-audio" loop></audio>
+    <audio id="sfx-click"></audio>
+    <audio id="sfx-flip"></audio>
+
+    <script>
+        const MUSIC_URL = "https://res.cloudinary.com/dbwqwgbtx/video/upload/v1780416925/11_-_Iris_wm5cnp.mp3";
+        const CLIC_SFX_URL = "https://res.cloudinary.com/dbwqwgbtx/video/upload/v1780071236/zapsplat_multimedia_beep_soft_click_button_87548_a99mcv.mp3";
+        const FLIP_SFX_URL = "https://res.cloudinary.com/dbwqwgbtx/video/upload/v1780093489/soundshelfstudio-ui-app-notification-524745_dg4hrb.mp3";
+
+        const bgAudio = document.getElementById('bg-audio');
+        const sfxClick = document.getElementById('sfx-click');
+        const sfxFlip = document.getElementById('sfx-flip');
+        if (bgAudio) bgAudio.src = MUSIC_URL;
+        if (sfxClick) sfxClick.src = CLIC_SFX_URL;
+        if (sfxFlip) sfxFlip.src = FLIP_SFX_URL;
+
+        const loaderScreen = document.getElementById('loader-screen');
+        const mainContent = document.getElementById('main-content');
+        const btnOpen = document.getElementById('btn-open');
+        const btnMute = document.getElementById('btn-mute');
+        const btnMuteMobile = document.getElementById('btn-mute-mobile');
+        const vinylDisc = document.getElementById('vinyl-disc');
+        const particleContainer = document.getElementById('particle-container');
+        
+        const youtubeDrawer = document.getElementById('youtube-drawer');
+        const btnToggleYoutube = document.getElementById('btn-toggle-youtube');
+        const closeDrawerBtn = document.getElementById('close-drawer');
+        const chevronIcon = document.getElementById('chevron-icon');
+        const youtubeBtnText = document.getElementById('youtube-btn-text');
+
+        let isDrawerOpen = false;
+
+        function closeDrawerCompletely() {
+            if (isDrawerOpen) {
+                youtubeDrawer.classList.remove('open');
+                chevronIcon.style.transform = 'rotate(0deg)';
+                youtubeBtnText.innerText = 'Abrir playlist';
+                isDrawerOpen = false;
+            }
+        }
+
+        function openDrawer() {
+            if (!isDrawerOpen) {
+                youtubeDrawer.classList.add('open');
+                chevronIcon.style.transform = 'rotate(180deg)';
+                youtubeBtnText.innerText = 'Fechar playlist';
+                isDrawerOpen = true;
+            }
+        }
+
+        function toggleDrawer() {
+            if (isDrawerOpen) {
+                closeDrawerCompletely();
+            } else {
+                openDrawer();
+            }
+        }
+
+        if (btnToggleYoutube) {
+            btnToggleYoutube.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (sfxClick) {
+                    sfxClick.currentTime = 0;
+                    sfxClick.volume = 0.5;
+                    sfxClick.play().catch(() => {});
+                }
+                toggleDrawer();
+            });
+        }
+        if (closeDrawerBtn) {
+            closeDrawerBtn.addEventListener('click', () => {
+                if (sfxClick) {
+                    sfxClick.currentTime = 0;
+                    sfxClick.play().catch(() => {});
+                }
+                closeDrawerCompletely();
+            });
+        }
+
+        let isMusicPlaying = false;
+
+        btnOpen.addEventListener('click', () => {
+            if (sfxClick) {
+                sfxClick.volume = 0.5;
+                sfxClick.play().catch(e => console.log("Erro ao tocar SFX:", e));
+            }
+            if (bgAudio) {
+                bgAudio.volume = 0.4;
+                bgAudio.play().then(() => {
+                    isMusicPlaying = true;
+                    updateMusicUI();
+                }).catch(e => console.log("Autoplay bloqueado", e));
+            }
+            loaderScreen.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => loaderScreen.style.display = 'none', 1000);
+            mainContent.classList.remove('hidden');
+            setTimeout(() => {
+                mainContent.classList.add('opacity-100');
+                const musicPlayer = document.getElementById('music-player');
+                if (musicPlayer) {
+                    musicPlayer.classList.remove('hidden');
+                    musicPlayer.classList.add('flex');
+                }
+            }, 100);
+        });
+
+        function toggleMusic() {
+            if (!bgAudio) return;
+            if (isMusicPlaying) {
+                bgAudio.pause();
+                isMusicPlaying = false;
+            } else {
+                bgAudio.play().catch(err => console.log(err));
+                isMusicPlaying = true;
+            }
+            updateMusicUI();
+        }
+
+        if (btnMute) btnMute.addEventListener('click', toggleMusic);
+        if (btnMuteMobile) btnMuteMobile.addEventListener('click', toggleMusic);
+
+        function updateMusicUI() {
+            if (!vinylDisc || !btnMute || !btnMuteMobile) return;
+            if (isMusicPlaying) {
+                vinylDisc.classList.add('rotate-vinyl');
+                btnMute.innerHTML = '<i data-lucide="music" class="w-5 h-5"></i>';
+                btnMuteMobile.innerHTML = '<i data-lucide="music" class="w-5 h-5 text-blush-rose"></i>';
+                document.getElementById('track-name').innerText = 'Greicy\'s Special Song';
+            } else {
+                vinylDisc.classList.remove('rotate-vinyl');
+                btnMute.innerHTML = '<i data-lucide="music-2" class="w-5 h-5 opacity-60"></i>';
+                btnMuteMobile.innerHTML = '<i data-lucide="music-4" class="w-5 h-5 text-slate-400"></i>';
+                document.getElementById('track-name').innerText = 'Música pausada';
+            }
+            lucide.createIcons();
+        }
+
+        function flipCard(cardElement) {
+            if (sfxFlip) {
+                sfxFlip.currentTime = 0;
+                sfxFlip.volume = 0.6;
+                sfxFlip.play().catch(e => console.log(e));
+            }
+            if(cardElement) cardElement.classList.toggle('is-flipped');
+            if(cardElement) {
+                const rect = cardElement.getBoundingClientRect();
+                for(let i=0; i < 15; i++) {
+                    setTimeout(() => {
+                        const spark = document.createElement('div');
+                        spark.classList.add('sparkle');
+                        spark.style.width = '6px';
+                        spark.style.height = '6px';
+                        spark.style.left = `${rect.left + (rect.width/2) + (Math.random()*100 - 50)}px`;
+                        spark.style.top = `${rect.top + (rect.height/2) + (Math.random()*100 - 50)}px`;
+                        spark.style.transition = 'all 1s ease-out';
+                        document.body.appendChild(spark);
+                        setTimeout(() => {
+                            spark.style.transform = `scale(2) translate(${(Math.random()*160)-80}px, ${(Math.random()*160)-80}px)`;
+                            spark.style.opacity = '1';
+                        }, 20);
+                        setTimeout(() => spark.remove(), 1000);
+                    }, i * 30);
+                }
+            }
+        }
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>
