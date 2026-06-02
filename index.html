@@ -185,36 +185,58 @@
                 flex-direction: column;
             }
         }
+
+        /* Efeito de carregamento ao rolar (scroll reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.85s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.85s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animação para os elementos do loader */
+        .loader-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .loader-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="relative min-h-screen text-slate-800 antialiased selection:bg-blush-200">
 
     <div id="particle-container" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
 
-    <!-- TELA DE LOADING -->
+    <!-- TELA DE LOADING COM ANIMAÇÃO REVEAL -->
     <div id="loader-screen" class="fixed inset-0 bg-gradient-to-tr from-[#ffebe3] via-[#fff5f6] to-[#ffd3db] z-50 flex flex-col items-center justify-center p-6 transition-all duration-1000">
         <div class="text-center max-w-md w-full flex flex-col items-center space-y-8">
-            <div class="relative w-24 h-24 flex items-center justify-center">
+            <div class="relative w-24 h-24 flex items-center justify-center loader-reveal">
                 <div class="absolute w-16 h-16 bg-blush-rose opacity-20 rounded-full animate-ping"></div>
                 <div class="absolute w-20 h-20 bg-blush-300 opacity-40 rounded-full animate-pulse"></div>
                 <div class="w-12 h-12 bg-blush-400 rounded-full flex items-center justify-center shadow-lg text-white">
                     <i data-lucide="heart" class="w-6 h-6 fill-current"></i>
                 </div>
             </div>
-            <div class="space-y-2">
+            <div class="space-y-2 loader-reveal" style="transition-delay: 0.1s">
                 <p class="text-xs uppercase tracking-[0.3em] text-blush-rose font-semibold">Special Edition • June 3rd</p>
                 <h1 class="text-5xl md:text-6xl font-cursive text-blush-500 font-bold drop-shadow-sm">Happy Birthday, Greicy!</h1>
                 <p class="text-sm text-slate-500 italic mt-2 font-serif"> ...</p>
-                <p class="text-sm text-slate-500 italic mt-2 font-serif"> Esta carta é para você. Aumente o volume, deixei uma música especial para você. ;)</p>
+                <p class="text-sm text-slate-500 italic mt-2 font-serif"> Aumente o volume, deixei uma música especial para você. ;)</p>
             </div>
-            <button id="btn-open" class="group relative px-10 py-4 bg-white border border-blush-200 text-blush-rose rounded-full font-semibold tracking-widest text-sm uppercase transition-all duration-500 rose-gold-glow rose-gold-glow-hover transform hover:-translate-y-1 active:translate-y-0 overflow-hidden">
+            <button id="btn-open" class="group relative px-10 py-4 bg-white border border-blush-200 text-blush-rose rounded-full font-semibold tracking-widest text-sm uppercase transition-all duration-500 rose-gold-glow rose-gold-glow-hover transform hover:-translate-y-1 active:translate-y-0 overflow-hidden loader-reveal" style="transition-delay: 0.2s">
                 <span class="absolute inset-0 bg-gradient-to-r from-blush-100 to-blush-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
                 <span class="relative z-10 flex items-center space-x-2">
                     <span>Abrir</span>
                     <i data-lucide="gift" class="w-4 h-4 transition-transform duration-300 group-hover:rotate-12"></i>
                 </span>
             </button>
-            <div class="text-xs text-slate-400 font-light mt-4">Quando você clicar em abrir, vai tocar uma música que me lembra você.</div>
+            <div class="text-xs text-slate-400 font-light mt-4 loader-reveal" style="transition-delay: 0.3s">Com carinho, didi.</div>
         </div>
     </div>
 
@@ -239,7 +261,7 @@
 
     <main id="main-content" class="hidden opacity-0 transition-opacity duration-1000 max-w-6xl mx-auto px-4 py-8 md:py-16 space-y-16 md:space-y-32">
 
-        <section class="text-center space-y-6 relative py-12">
+        <section class="text-center space-y-6 relative py-12 reveal">
             <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
                 <svg viewBox="0 0 200 200" class="w-96 h-96 text-blush-500">
                     <path fill="currentColor" d="M100,20 C144,20 180,56 180,100 C180,144 144,180 100,180 C56,180 20,144 20,100 C20,56 56,20 100,20 Z" />
@@ -248,11 +270,11 @@
             <p class="text-blush-rose font-semibold tracking-[0.4em] text-xs md:text-sm uppercase animate-pulse">Parabéns pelo seu dia!</p>
             <h2 class="text-6xl md:text-8xl font-cursive text-blush-500 font-bold leading-none">Greicy, Feliz Aniversário!</h2>
             <div class="w-24 h-1 bg-gradient-to-r from-transparent via-blush-rose to-transparent mx-auto my-4"></div>
-            <p class="text-lg md:text-xl text-slate-600 font-serif max-w-2xl mx-auto leading-relaxed px-4">Oi, Gre! Chegou o dia mais importante do ano, e eu queria recordar algumas coisas com você.</p>
+            <p class="text-lg md:text-xl text-slate-600 font-serif max-w-2xl mx-auto leading-relaxed px-4">Chegou o dia mais importante do ano, e eu queria recordar algumas coisas com você.</p>
         </section>
 
         <!-- SEÇÃO: MURAL DE POLAROIDS -->
-        <section class="space-y-8">
+        <section class="space-y-8 reveal">
             <div class="text-center space-y-2">
                 <h3 class="text-2xl font-serif text-slate-800 font-semibold flex items-center justify-center space-x-2">
                     <i data-lucide="camera" class="w-6 h-6 text-blush-rose"></i>
@@ -336,53 +358,8 @@
             </div>
         </section>
 
-        <!-- SEÇÃO: O QUE A GENTE OUVIAL... COM GAVETA DO YOUTUBE (SEM AUTOPLAY) - CORRIGIDA -->
-        <section class="max-w-4xl mx-auto">
-            <div class="bg-white/40 backdrop-blur-sm rounded-2xl p-8 md:p-10 text-center border border-blush-100 shadow-md transition-all duration-300 hover:shadow-lg">
-                <div class="space-y-5">
-                    <div class="flex items-center justify-center space-x-2">
-                        <i data-lucide="headphones" class="w-7 h-7 text-blush-rose"></i>
-                        <h3 class="text-1xl md:text-3xl font-serif text-slate-800 font-semibold">O que a gente ouvia...</h3>
-                        <i data-lucide="music" class="w-6 h-6 text-blush-400"></i>
-                    </div>
-                    <p class="text-lg text-slate-600 font-serif italic max-w-lg mx-auto leading-relaxed">A música é uma forma de reviver o passado.</p>
-                    <div class="pt-4">
-                        <button id="btn-toggle-youtube" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blush-500 to-blush-400 hover:from-blush-600 hover:to-blush-500 text-white rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 rose-gold-glow-hover">
-                            <i data-lucide="youtube" class="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse"></i>
-                            <span class="text-sm md:text-base uppercase tracking-wide" id="youtube-btn-text">Abrir playlist</span>
-                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" id="chevron-icon"></i>
-                        </button>
-                    </div>
-                    <p class="text-[11px] text-slate-400 pt-2">E essas são as músicas que me lembram você.</p>
-                </div>
-            </div>
-
-            <!-- GAVETA DO YOUTUBE - CORRIGIDA: sem sobreposição e fecha corretamente -->
-            <div id="youtube-drawer" class="youtube-drawer mt-4 border border-blush-100 shadow-xl rounded-2xl overflow-hidden">
-                <div class="p-4 md:p-6">
-                    <div class="flex justify-between items-center mb-3">
-                        <h4 class="font-serif text-blush-rose font-semibold text-lg">Nossa playlist especial</h4>
-                        <button id="close-drawer" class="text-slate-400 hover:text-blush-rose transition-colors">
-                            <i data-lucide="x" class="w-5 h-5"></i>
-                        </button>
-                    </div>
-                    <div class="youtube-embed-wrapper">
-                        <iframe id="youtube-player-iframe" 
-                                src="https://www.youtube.com/embed/_HZM0QiuUS8?autoplay=0&rel=0&modestbranding=1&playsinline=1" 
-                                title="Playlist especial Greicy" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay=0; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-                    <p class="text-xs text-slate-500 mt-3 text-center">Clique no play para ouvir nossa playlist - as músicas que marcaram nossa história</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SEÇÃO: TEXTO DAS QUALIDADES -->
-        <section class="max-w-4xl mx-auto bg-white/30 backdrop-blur-sm rounded-2xl p-6 md:p-10 text-center border border-blush-100 shadow-md">
+        <!-- SEÇÃO: ...É VOCÊ. SEMPRE FOI VOCÊ (movida para logo após as fotos) -->
+        <section class="max-w-4xl mx-auto bg-white/30 backdrop-blur-sm rounded-2xl p-6 md:p-10 text-center border border-blush-100 shadow-md reveal">
             <div class="space-y-4">
                 <span class="inline-flex items-center space-x-1 px-3 py-1 bg-blush-100 text-blush-rose rounded-full text-xs font-semibold uppercase tracking-widest">
                     <i data-lucide="heart" class="w-3 h-3 animate-pulse"></i>
@@ -398,18 +375,64 @@
             </div>
         </section>
 
-        <!-- SEÇÃO: PÓS CRÉDITOS - Video Shorts + Playlist personalizada -->
-        <section class="max-w-6xl mx-auto space-y-6">
+        <!-- SEÇÃO: PÓS CRÉDITOS - com O que a gente ouvia imediatamente abaixo do título -->
+        <section class="max-w-6xl mx-auto space-y-6 reveal">
             <div class="text-center space-y-2">
                 <h3 class="text-2xl font-serif text-slate-800 font-semibold flex items-center justify-center space-x-2">
                     <i data-lucide="clapperboard" class="w-6 h-6 text-blush-rose"></i>
                     <span>Pós Créditos</span>
                 </h3>
-                <p class="text-sm text-slate-500 italic">Um making off especial e nossa playlist da vida</p>
+                <p class="text-sm text-slate-500 italic">O making off desse cartão foi... emotivo. rs'</p>
             </div>
-            
+
+            <!-- Seção "O que a gente ouvia" movida para IMEDIATAMENTE ABAIXO do texto, antes do making off e da playlist -->
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white/40 backdrop-blur-sm rounded-2xl p-8 md:p-10 text-center border border-blush-100 shadow-md transition-all duration-300 hover:shadow-lg">
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-2 p-4 pb-0">
+                            <i data-lucide="headphones" class="w-7 h-7 text-blush-rose"></i>
+                            <h3 class="text-1xl md:text-3xl font-serif text-slate-800 font-semibold"></h3>
+                            <i data-lucide="" class="w-6 h-6 text-blush-400"></i>
+                        </div>
+                        <p class="text-lg text-slate-600 font-serif italic max-w-lg mx-auto leading-relaxed">A música é a forma mais bonita de reviver o passado, por isso eu fiz essa playlist com as músicas que a gente ouvia e outras que me lembram você.</p>
+                        <div class="pt-4">
+                            <button id="btn-toggle-youtube" class="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blush-500 to-blush-400 hover:from-blush-600 hover:to-blush-500 text-white rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 rose-gold-glow-hover">
+                                <i data-lucide="youtube" class="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse"></i>
+                                <span class="text-sm md:text-base uppercase tracking-wide" id="youtube-btn-text">Abrir playlist</span>
+                                <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300" id="chevron-icon"></i>
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-slate-400 pt-2">Espero que goste.</p>
+                    </div>
+                </div>
+
+                <!-- GAVETA DO YOUTUBE -->
+                <div id="youtube-drawer" class="youtube-drawer mt-4 border border-blush-100 shadow-xl rounded-2xl overflow-hidden">
+                    <div class="p-4 md:p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="font-serif text-blush-rose font-semibold text-lg">Nossa playlist especial</h4>
+                            <button id="close-drawer" class="text-slate-400 hover:text-blush-rose transition-colors">
+                                <i data-lucide="x" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                        <div class="youtube-embed-wrapper">
+                            <iframe id="youtube-player-iframe" 
+                                    src="https://www.youtube.com/embed/_HZM0QiuUS8?autoplay=0&rel=0&modestbranding=1&playsinline=1" 
+                                    title="Playlist especial Greicy" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay=0; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerpolicy="strict-origin-when-cross-origin" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3 text-center">Clique no play para ouvir nossa playlist - as músicas que marcaram nossa história</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container do making off e playlist pessoal -->
             <div class="post-credits-container">
-                <!-- Lado esquerdo: Video Shorts (sem som e sem interromper a música) -->
+                <!-- Lado esquerdo: Video Shorts -->
                 <div class="post-credits-video">
                     <div class="bg-white/40 backdrop-blur-sm rounded-2xl p-4 border border-blush-100 shadow-md h-full flex flex-col">
                         <div class="flex items-center gap-2 mb-3">
@@ -424,7 +447,7 @@
                                     allowfullscreen>
                             </iframe>
                         </div>
-                        <p class="text-xs text-slate-500 mt-3 text-center">📽️ Clique para assistir ao making off (vídeo sem som)</p>
+                        <p class="text-xs text-slate-500 mt-3 text-center"> Clique para assistir ao making off </p>
                     </div>
                 </div>
 
@@ -462,12 +485,12 @@
         </section>
 
         <!-- SEÇÃO: MENSAGEM FINAL -->
-        <section class="max-w-3xl mx-auto bg-white/40 backdrop-blur-md rounded-3xl p-8 md:p-12 text-center border border-blush-100 rose-gold-glow space-y-6">
+        <section class="max-w-3xl mx-auto bg-white/40 backdrop-blur-md rounded-3xl p-8 md:p-12 text-center border border-blush-100 rose-gold-glow space-y-6 reveal">
             <div class="w-16 h-16 bg-blush-100 rounded-full flex items-center justify-center text-blush-rose mx-auto">
                 <i data-lucide="gift" class="w-8 h-8"></i>
             </div>
             <h3 class="text-3xl font-serif text-slate-800 font-bold">Feliz Vida, Greicy!</h3>
-            <p class="text-slate-600 leading-relaxed font-serif text-lg">Se eu pudesse te daria o mundo todinho. Enquanto eu existir você nunca vai estar sozinha.</p>
+            <p class="text-slate-600 leading-relaxed font-serif text-lg">Se eu pudesse te daria o mundo todinho, mas como não posso te mandei cookies. Enquanto eu existir você nunca vai estar sozinha.</p>
             <p class="text-slate-600 leading-relaxed font-serif text-lg">Te amo infinitamente,</p>
             <div class="font-cursive text-4xl text-blush-rose pt-4">Sua irmã, Didi.</div>
         </section>
@@ -499,7 +522,6 @@
         const btnMute = document.getElementById('btn-mute');
         const btnMuteMobile = document.getElementById('btn-mute-mobile');
         const vinylDisc = document.getElementById('vinyl-disc');
-        const particleContainer = document.getElementById('particle-container');
         
         const youtubeDrawer = document.getElementById('youtube-drawer');
         const btnToggleYoutube = document.getElementById('btn-toggle-youtube');
@@ -558,6 +580,16 @@
 
         let isMusicPlaying = false;
 
+        // Ativar animação de revelação no loader
+        function activateLoaderReveal() {
+            const loaderElements = document.querySelectorAll('.loader-reveal');
+            loaderElements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('active');
+                }, index * 100);
+            });
+        }
+
         btnOpen.addEventListener('click', () => {
             if (sfxClick) {
                 sfxClick.volume = 0.5;
@@ -580,6 +612,7 @@
                     musicPlayer.classList.remove('hidden');
                     musicPlayer.classList.add('flex');
                 }
+                initScrollReveal();
             }, 100);
         });
 
@@ -614,34 +647,29 @@
             lucide.createIcons();
         }
 
-        function flipCard(cardElement) {
-            if (sfxFlip) {
-                sfxFlip.currentTime = 0;
-                sfxFlip.volume = 0.6;
-                sfxFlip.play().catch(e => console.log(e));
-            }
-            if(cardElement) cardElement.classList.toggle('is-flipped');
-            if(cardElement) {
-                const rect = cardElement.getBoundingClientRect();
-                for(let i=0; i < 15; i++) {
-                    setTimeout(() => {
-                        const spark = document.createElement('div');
-                        spark.classList.add('sparkle');
-                        spark.style.width = '6px';
-                        spark.style.height = '6px';
-                        spark.style.left = `${rect.left + (rect.width/2) + (Math.random()*100 - 50)}px`;
-                        spark.style.top = `${rect.top + (rect.height/2) + (Math.random()*100 - 50)}px`;
-                        spark.style.transition = 'all 1s ease-out';
-                        document.body.appendChild(spark);
-                        setTimeout(() => {
-                            spark.style.transform = `scale(2) translate(${(Math.random()*160)-80}px, ${(Math.random()*160)-80}px)`;
-                            spark.style.opacity = '1';
-                        }, 20);
-                        setTimeout(() => spark.remove(), 1000);
-                    }, i * 30);
-                }
-            }
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const checkReveal = () => {
+                const windowHeight = window.innerHeight;
+                const revealPoint = 120;
+                
+                revealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - revealPoint) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', checkReveal);
+            checkReveal();
         }
+
+        // Ativar a animação do loader ao carregar a página
+        setTimeout(() => {
+            activateLoaderReveal();
+        }, 100);
 
         lucide.createIcons();
     </script>
